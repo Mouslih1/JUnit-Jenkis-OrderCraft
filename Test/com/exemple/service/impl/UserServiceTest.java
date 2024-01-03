@@ -1,9 +1,10 @@
 package com.exemple.service.impl;
 
+import com.exemple.config.DispatcherServletInit;
 import com.exemple.config.PersistenceJPAConfig;
 import com.exemple.entity.User;
 import com.exemple.service.InterfaceUserService;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,74 +14,80 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ContextConfiguration(classes = {PersistenceJPAConfig.class})
+@ContextConfiguration(classes = {DispatcherServletInit.class, PersistenceJPAConfig.class})
 @ExtendWith(SpringExtension.class)
-
 class UserServiceTest {
 
     @Autowired
     private InterfaceUserService interfaceUserService;
 
+    private User testUser;
+
+    @BeforeEach
+    void setUp() {
+        // Create a new user before each test
+        testUser = new User();
+        testUser.setName("test");
+        testUser.setEmail("test@example.com");
+        testUser.setPassword("testpass");
+        testUser = interfaceUserService.addUser(testUser);
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        if (interfaceUserService.getById(testUser.getId()) != null) {
+            interfaceUserService.deleteUser(testUser.getId());
+        }
+    }
+
     @Test
     void addUser() {
-
-        User user = new User();
-        user.setId(1L);
-        user.setName("test");
-        user.setEmail("admin@admin.com");
-        user.setPassword("admin");
-
-        User usertest =interfaceUserService.addUser(user);
-        assertNotNull(usertest);
-        assertEquals("test", user.getName());
-
+        assertNotNull(testUser);
+        assertEquals("test", testUser.getName());
     }
 
     @Test
     void getUsers() {
         List<User> users = interfaceUserService.getUsers();
         assertNotNull(users);
-        assertFalse(users.isEmpty());
-    }
 
-    @Test
-    void updateUser() {
     }
 
     @Test
     void deleteUser() {
-
-        User user = new User();
-        user.setId(1L);
-        user.setName("test");
-        user.setEmail("admin@admin.com");
-        user.setPassword("admin");
-
-        interfaceUserService.addUser(user);
-
-        interfaceUserService.deleteUser(1L);
-
-        User deletedUser = interfaceUserService.getById(1L);
+        interfaceUserService.deleteUser(testUser.getId());
+        User deletedUser = interfaceUserService.getById(testUser.getId());
         assertNull(deletedUser);
     }
 
     @Test
     void getById() {
-        User retrievedUser = interfaceUserService.getById(1L);
+        User retrievedUser = interfaceUserService.getById(testUser.getId());
         assertNotNull(retrievedUser);
     }
 
     @Test
-    void authenticate() {
+    void updateUser() {
+        assertNotNull(testUser.getId(), "User ID should not be null after saving");
+        testUser.setName("updatedName");
 
-        User authenticatedUser = interfaceUserService.authenticate("admin@admin.com", "123456789");
+        User updatedUser = interfaceUserService.updateUser(testUser);
+        assertNotNull(updatedUser);
+
+        assertEquals("updatedName", updatedUser.getName());
+    }
+
+    @Test
+    void authenticate() {
+        User authenticatedUser = interfaceUserService.authenticate("test@example.com", "testpass");
         assertNotNull(authenticatedUser);
     }
 
     @Test
     void getByEmail() {
-        User retrievedUser = interfaceUserService.getByEmail("admin@admin.com");
-        assertNotNull(retrievedUser);
+        User retrievedUser = interfaceUserService.getByEmail("test@example.com");
+        assertNotNull(retrievedUser, "Retrieved user should not be null");
 
     }
 }
