@@ -49,14 +49,14 @@ class CommandeProduitsServiceTest {
     void addCommandeProduits()
     {
         CommandeProduits commandeProduits = new CommandeProduits();
-        Produit produit = interfaceProduitService.getById(2L);
-        Commande commande = interfaceCommandeService.getById(60L);
+        Produit produit = interfaceProduitService.getById(6L);
+        Commande commande = interfaceCommandeService.getById(1L);
         commandeProduits.setCommande(commande);
         commandeProduits.setProduit(produit);
         commandeProduits.setQuantite_commander(3);
         commandeProduits.setPrix_total(produit.getPrix_unitaire()*3);
         CommandeProduits cp = interfaceCommandeProduitsService.addCommandeProduits(commandeProduits);
-        assertNotEquals(interfaceCommandeProduitsService.getById(1L), cp);
+        assertNotEquals(interfaceCommandeProduitsService.getById(2L), cp);
         assertNotNull(cp);
     }
 

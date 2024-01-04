@@ -57,8 +57,8 @@ class CommandeServiceTest {
     void getById() {
 
         Commande expectedCommande = new Commande();
-        expectedCommande.setId(4L);
-        expectedCommande.setAddress_livraison("tk");
+        expectedCommande.setId(1L);
+        expectedCommande.setAddress_livraison("TK CASA");
         expectedCommande.setDate_creation(LocalDate.now());
         expectedCommande.setClient(clientService.getById(1L));
         expectedCommande.setEtat_commande(Etat.EN_COURS);
