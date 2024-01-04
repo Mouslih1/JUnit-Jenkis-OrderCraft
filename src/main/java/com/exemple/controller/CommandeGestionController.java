@@ -6,6 +6,7 @@ import com.exemple.service.InterfaceCommandeProduitsService;
 import com.exemple.service.InterfaceCommandeService;
 import com.exemple.service.InterfaceProduitService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +22,13 @@ import java.util.List;
 @RequestMapping("/commandes")
 @SessionAttributes({"success"})
 public class CommandeGestionController {
-
+    @Autowired
     private InterfaceCommandeService interfaceCommandeService;
+    @Autowired
     private InterfaceClientService interfaceClientService;
+    @Autowired
     private InterfaceProduitService interfaceProduitService;
+    @Autowired
     private InterfaceCommandeProduitsService interfaceCommandeProduitsService;
 
     @GetMapping

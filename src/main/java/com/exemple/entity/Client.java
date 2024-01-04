@@ -20,4 +20,9 @@ public class Client {
     private String email;
     private String ville;
 
+    public Client(String name, String email, String ville) {
+        this.name = name;
+        this.email = email;
+        this.ville = ville;
+    }
 }

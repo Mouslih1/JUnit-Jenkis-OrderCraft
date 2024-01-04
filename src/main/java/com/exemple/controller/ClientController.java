@@ -49,7 +49,7 @@ public class ClientController {
     @PostMapping("/update")
     public String updateClient(@ModelAttribute("client") Client client)
     {
-        interfaceClientService.updateUser(client);
+        interfaceClientService.updateClient(client);
         return "redirect:/clients";
     }
 

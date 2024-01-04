@@ -27,7 +27,7 @@ public class ClientService implements InterfaceClientService {
     }
 
     @Override
-    public Client updateUser(Client client)
+    public Client updateClient(Client client)
     {
         return interfaceClientRepository.save(client);
     }

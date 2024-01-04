@@ -96,7 +96,6 @@
       <version>3.19.0</version> <!-- Use the latest version available -->
       <scope>test</scope>
     </dependency>
-
   </dependencies>
   <build>
     <finalName>cfg</finalName>
