@@ -37,7 +37,9 @@ class CommandeServiceTest {
     @BeforeEach
     void setup() {
         System.out.println("Instantiating CommandeService");
+/*
         client.setId(1L);
+*/
         client.setName("hamza");
         client.setEmail("hamza@gm.com");
         client.setVille("casa");
@@ -46,22 +48,25 @@ class CommandeServiceTest {
         commande.setDate_creation(LocalDate.now());
         commande.setEtat_commande(Etat.EN_COURS);
         commande.setClient(clientService.getById(1L));
-        System.out.println(commande);
-        commande= commandeService.addCommande(commande);
-        System.out.println(commande);
+        commande=commandeService.addCommande(commande);
     }
     @AfterEach
     void tearDown() {
         System.out.println("Should Execute After Each Test");
+
         if(commandeService.getById(commande.getId()) !=null){
             commandeService.deleteCommandeById(commande.getId());
+        }
+
+        if(clientService.getById(client.getId()) !=null){
+            clientService.delete(client.getId());
         }
     }
     @Test
     @DisplayName("Should Add Commande")
         void addCommande() {
             assertNotNull(commande);
-            assertNotEquals(commandeService.getById(13L), commande);
+            assertNotEquals(commandeService.getById(12L), commande);
         }
 
 
