@@ -116,7 +116,6 @@ class CommandeProduitsServiceTest {
             interfaceClientService.delete(client.getId());
             System.out.println("deleting client successfully");
         }
-
     }
 
     @AfterAll
