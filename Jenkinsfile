@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Mouslih0/JUnit-Jenkis-OrderCraft'
+                git 'https://github.com/Mouslih0/JUnit-Jenkis-OrderCraft/'
             }
         }
 
