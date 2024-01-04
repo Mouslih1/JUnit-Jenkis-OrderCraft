@@ -4,14 +4,18 @@ import com.exemple.entity.Commande;
 import com.exemple.repository.InterfaceCommandeRepository;
 import com.exemple.service.InterfaceCommandeService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor
 public class CommandeService implements InterfaceCommandeService {
 
+    @Autowired
     private InterfaceCommandeRepository interfaceCommandeRepository;
 
     @Override
