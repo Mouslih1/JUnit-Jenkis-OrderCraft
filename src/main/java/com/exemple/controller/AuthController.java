@@ -40,7 +40,7 @@ public class AuthController {
         if(interfaceUserService.authenticate(email, password) != null)
         {
             User user = interfaceUserService.authenticate(email, password);
-            session.setAttribute("name", user.getName());
+            session.setAttribute("name", user);
             return "redirect:/dashboard";
         }else{
             model.addAttribute("error", "Fail login with this email & password try again !");

@@ -27,7 +27,7 @@ public class ClientController {
     @GetMapping("/create")
     public String showCreateForm(Model model)
     {
-        model.addAttribute("client", new Client());
+        model.addAttribute("client", new Client("client1", "123", "Fes"));
         return "/clients/create";
     }
 
@@ -49,7 +49,7 @@ public class ClientController {
     @PostMapping("/update")
     public String updateClient(@ModelAttribute("client") Client client)
     {
-        interfaceClientService.updateUser(client);
+        interfaceClientService.updateClient(client);
         return "redirect:/clients";
     }
 
