@@ -20,4 +20,11 @@ public class Produit {
     private String description;
     private double prix_unitaire;
     private int quantity_in_stock;
+
+    public Produit(String name, String description, double prix_unitaire, int quantity_in_stock) {
+        this.name = name;
+        this.description = description;
+        this.prix_unitaire = prix_unitaire;
+        this.quantity_in_stock = quantity_in_stock;
+    }
 }

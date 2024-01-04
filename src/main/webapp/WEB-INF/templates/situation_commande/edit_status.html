@@ -28,10 +28,9 @@
                                             <input type="text" th:field="*{id}" th:value="*{id}" name="commande.id" readonly placeholder="commande id" id="id_commande" autocomplete="given-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         </div>
 
-                                        <input type="hidden" name="id_client" value="<%=client.getId()%>">
                                         <div class="col-span-6 sm:col-span-3">
                                             <label for="client" class="block text-sm font-medium text-gray-700">Client name</label>
-                                            <input type="text" id="client" th:field="*{client.id}" name="id" th:value="*{client.name}" readonly placeholder="client name" autocomplete="given-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <input type="text" id="client" name="commande.client.id" th:value="*{client.name}" readonly placeholder="client name" autocomplete="given-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         </div>
 
                                         <div class="col-span-6">

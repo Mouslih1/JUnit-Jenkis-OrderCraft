@@ -24,4 +24,10 @@ public class CommandeProduitsService implements InterfaceCommandeProduitsService
     public List<CommandeProduits> getCommandeProduits() {
         return interfaceCommandeProduitRepository.findAll();
     }
+
+    @Override
+    public CommandeProduits getById(Long id)
+    {
+        return interfaceCommandeProduitRepository.findById(id).orElse(null);
+    }
 }
