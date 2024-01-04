@@ -1,6 +1,7 @@
 package com.exemple.service.impl;
 
 import com.exemple.config.PersistenceJPAConfig;
+import com.exemple.entity.Client;
 import com.exemple.entity.Commande;
 import com.exemple.entity.Etat;
 import com.exemple.entity.Produit;
@@ -26,6 +27,7 @@ class CommandeServiceTest {
     @Autowired
     private InterfaceClientService clientService;
     Commande commande = new Commande();
+    Client client = new Client();
 
     @BeforeAll
     static void setupAll() {
@@ -35,11 +37,18 @@ class CommandeServiceTest {
     @BeforeEach
     void setup() {
         System.out.println("Instantiating CommandeService");
+        client.setId(1L);
+        client.setName("hamza");
+        client.setEmail("hamza@gm.com");
+        client.setVille("casa");
+        client = clientService.addClient(client);
         commande.setAddress_livraison("TK CASA");
         commande.setDate_creation(LocalDate.now());
         commande.setEtat_commande(Etat.EN_COURS);
         commande.setClient(clientService.getById(1L));
+        System.out.println(commande);
         commande= commandeService.addCommande(commande);
+        System.out.println(commande);
     }
     @AfterEach
     void tearDown() {
@@ -75,7 +84,7 @@ class CommandeServiceTest {
         List<Commande> commandes = commandeService.getCommandes();
 
         assertFalse(commandes.isEmpty());
-
+        System.out.println(commandes);
     }
 
     @Test
