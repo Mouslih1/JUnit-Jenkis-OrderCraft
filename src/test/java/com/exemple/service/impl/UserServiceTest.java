@@ -51,7 +51,6 @@ class UserServiceTest {
     void getUsers() {
         List<User> users = interfaceUserService.getUsers();
         assertNotNull(users);
-
     }
 
     @Test
@@ -88,6 +87,5 @@ class UserServiceTest {
     void getByEmail() {
         User retrievedUser = interfaceUserService.getByEmail("test@example.com");
         assertNotNull(retrievedUser, "Retrieved user should not be null");
-
     }
 }

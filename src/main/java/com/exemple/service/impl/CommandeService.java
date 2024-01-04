@@ -41,4 +41,10 @@ public class CommandeService implements InterfaceCommandeService {
     {
         return interfaceCommandeRepository.save(commande);
     }
+
+    @Override
+    public void deleteCommandeById(Long id)
+    {
+        interfaceCommandeRepository.deleteById(id);
+    }
 }

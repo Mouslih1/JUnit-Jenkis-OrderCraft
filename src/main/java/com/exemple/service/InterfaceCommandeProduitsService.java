@@ -8,4 +8,5 @@ public interface InterfaceCommandeProduitsService{
     CommandeProduits addCommandeProduits(CommandeProduits commandeProduits);
     List<CommandeProduits> getCommandeProduits();
     CommandeProduits getById(Long id);
+    void deleteCommandeProduitsById(Long id);
 }

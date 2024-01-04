@@ -9,4 +9,5 @@ public interface InterfaceCommandeService {
     Commande getById(Long id);
     List<Commande> getCommandes();
     Commande updateCommande(Commande commande);
+    void deleteCommandeById(Long id);
 }

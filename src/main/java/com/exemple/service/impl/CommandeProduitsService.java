@@ -30,4 +30,10 @@ public class CommandeProduitsService implements InterfaceCommandeProduitsService
     {
         return interfaceCommandeProduitRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void deleteCommandeProduitsById(Long id)
+    {
+        interfaceCommandeProduitRepository.deleteById(id);
+    }
 }
