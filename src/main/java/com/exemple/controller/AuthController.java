@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 @AllArgsConstructor
 @SessionAttributes({"error"})
 public class AuthController {
-
+    
     private InterfaceUserService interfaceUserService;
 
     @RequestMapping("/")
