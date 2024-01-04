@@ -46,17 +46,17 @@ public class ClientServiceTest {
         // Then
         assertThat(retrievedClient).isNull();
     }
-//    @Test
-//    void getClientsTest() {
-//        // Given
-//        Client client = new Client("client1","123","Fes");
-//        clientRepository.save(client);
-//        // When
-//        List<Client>clients = clientService.getClients();
-//        // Then
-//        assertThat(clients).hasSize(1);
-//        assertThat(clients.get(0)).isEqualTo(client);
-//    }
+    @Test
+    void getClientsTest() {
+        // Given
+        Client client = new Client("client1","123","Fes");
+        clientRepository.save(client);
+        // When
+        List<Client>clients = clientService.getClients();
+        // Then
+        assertThat(clients).hasSize(1);
+        assertThat(clients.get(0)).isEqualTo(client);
+    }
 
     @Test
     void addClientTest() {
