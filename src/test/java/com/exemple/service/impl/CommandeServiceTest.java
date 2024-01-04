@@ -5,6 +5,8 @@ import com.exemple.entity.Commande;
 import com.exemple.entity.Etat;
 import com.exemple.entity.Produit;
 import com.exemple.repository.InterfaceCommandeRepository;
+import com.exemple.service.InterfaceClientService;
+import com.exemple.service.InterfaceCommandeService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class CommandeServiceTest {
 
     @Autowired
-    private CommandeService commandeService;
+    private InterfaceCommandeService commandeService;
     @Autowired
-    private ClientService clientService;
-    @Autowired
-    private ProduitService produitService;
+    private InterfaceClientService clientService;
+    Commande commande = new Commande();
 
     @BeforeAll
     static void setupAll() {
@@ -34,21 +35,24 @@ class CommandeServiceTest {
     @BeforeEach
     void setup() {
         System.out.println("Instantiating CommandeService");
+        commande.setAddress_livraison("TK CASA");
+        commande.setDate_creation(LocalDate.now());
+        commande.setEtat_commande(Etat.EN_COURS);
+        commande.setClient(clientService.getById(1L));
+        commande= commandeService.addCommande(commande);
     }
-
+    @AfterEach
+    void tearDown() {
+        System.out.println("Should Execute After Each Test");
+        if(commandeService.getById(commande.getId()) !=null){
+            commandeService.deleteCommandeById(commande.getId());
+        }
+    }
     @Test
     @DisplayName("Should Add Commande")
         void addCommande() {
-            System.out.println("add commande");
-            Commande commande = new Commande();
-            commande.setAddress_livraison("TK CASA");
-            commande.setDate_creation(LocalDate.now());
-            commande.setEtat_commande(Etat.EN_COURS);
-            commande.setClient(clientService.getById(1L));
-            System.out.println(commande);
-            Commande c = commandeService.addCommande(commande);
-            assertNotNull(c);
-            assertNotEquals(commandeService.getById(13L), c);
+            assertNotNull(commande);
+            assertNotEquals(commandeService.getById(13L), commande);
         }
 
 
@@ -56,18 +60,11 @@ class CommandeServiceTest {
     @DisplayName("Should Get Commande by ID")
     void getById() {
 
-        Commande expectedCommande = new Commande();
-        expectedCommande.setId(1L);
-        expectedCommande.setAddress_livraison("TK CASA");
-        expectedCommande.setDate_creation(LocalDate.now());
-        expectedCommande.setClient(clientService.getById(1L));
-        expectedCommande.setEtat_commande(Etat.EN_COURS);
-
-        Long id = expectedCommande.getId();
+        Long id = commande.getId();
 
         Commande retrievedCommande = commandeService.getById(id);
 
-        assertEquals(expectedCommande, retrievedCommande);
+        assertEquals(commande, retrievedCommande);
     }
 
     @Test
@@ -84,20 +81,15 @@ class CommandeServiceTest {
     @Test
     @DisplayName("Should Update Commande Status")
     void updateCommande() {
-        Commande existingCommande = new Commande();
-        existingCommande.setAddress_livraison("tk");
-        existingCommande.setDate_creation(LocalDate.now());
-        existingCommande.setEtat_commande(Etat.EN_COURS);
-        existingCommande.setClient(clientService.getById(1L));
 
-        commandeService.addCommande(existingCommande);
+
+        commandeService.addCommande(commande);
 
         // Set the new status for updated Commande
         Etat newStatus = Etat.ANNULER;
-
         // Create a new Commande instance with the same ID and updated status
         Commande updatedCommande = new Commande();
-        updatedCommande.setId(existingCommande.getId());
+        updatedCommande.setId(commande.getId());
         updatedCommande.setEtat_commande(newStatus);
         updatedCommande.setAddress_livraison("tk");
         updatedCommande.setDate_creation(LocalDate.now());
@@ -106,14 +98,11 @@ class CommandeServiceTest {
         Commande resultCommande = commandeService.updateCommande(updatedCommande);
 
         // Check that only the status is updated
-        assertEquals(existingCommande.getId(), resultCommande.getId());
+        assertEquals(commande.getId(), resultCommande.getId());
         assertEquals(newStatus, resultCommande.getEtat_commande());
     }
 
-    @AfterEach
-    void tearDown() {
-        System.out.println("Should Execute After Each Test");
-    }
+
 
     @AfterAll
     static void tearDownAll() {
