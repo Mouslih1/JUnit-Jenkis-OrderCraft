@@ -4,6 +4,7 @@ pipeline {
     tools {
         maven 'Maven'
         jdk 'java8'
+        git 'git'
     }
 
     stages {
@@ -15,13 +16,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                sh 'mvn clean install'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                sh 'mvn test'
             }
         }
     }
