@@ -43,7 +43,8 @@ public class CommandeService implements InterfaceCommandeService {
     }
 
     @Override
-    public void deleteCommandeById(Long id){
+    public void deleteCommandeById(Long id)
+    {
         interfaceCommandeRepository.deleteById(id);
     }
 }
