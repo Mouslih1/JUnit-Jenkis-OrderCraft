@@ -3,6 +3,7 @@ pipeline {
 
     tools {
         maven 'Maven'
+        jdk 'java8'
     }
 
     stages {
