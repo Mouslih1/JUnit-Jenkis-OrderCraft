@@ -1,4 +1,4 @@
-# spring-mvc-jpa-thymleaf-ordercraft
+# JUnit-Jenkins-OrderCraft
 Configuration Spring MVC :
 Configuration du fichier web.xml et les class java @Configuration et @Bean:
 
@@ -86,4 +86,27 @@ Diagrame cas d'utilisation:
 
 ![UseCaseDiagramGestionCommandes](https://github.com/Mouslih0/spring-mvc-jpa-thymleaf-ordercraft/assets/106397107/37e9cc8e-e8fb-412a-8f4a-29b66e68791a)
 
+## Test unitaire pour tout les class service :
+
+![img.png](img.png)
+
+## Test pour class ClientServiceTest :
+
+![img_9.png](img_9.png)
+
+## Test pour class CommandeProduittServiceTest :
+
+![img_5.png](img_5.png)
+
+## Test pour class CommandeServiceTest :
+
+![img_6.png](img_6.png)
+
+## Test pour class ProduitServiceTest :
+
+![img_7.png](img_7.png)
+
+## Test pour class UserServiceTest :
+
+![img_8.png](img_8.png)
 
