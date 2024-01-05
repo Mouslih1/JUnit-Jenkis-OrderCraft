@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main' , url: 'https://github.com/Mouslih0/JUnit-Jenkis-OrderCraft/'
+                git branch: 'main', url: 'https://github.com/Mouslih0/JUnit-Jenkis-OrderCraft/'
             }
         }
 
@@ -37,17 +37,19 @@ pipeline {
                 }
             }
         }
-    }
 
-
-    stage ('report') {
-        steps {
-           script {
-               sh 'mvn clean site'
-           }
+        stage('Report') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'mvn clean site'
+                    } else {
+                        bat 'mvn clean site'
+                    }
+                }
+            }
         }
     }
-
 
     post {
         success {
@@ -55,7 +57,11 @@ pipeline {
         }
 
         failure {
-             echo 'Build failed!'
+            echo 'Build failed!'
+        }
+
+        unstable {
+            echo 'Build unstable!'
         }
     }
 }
