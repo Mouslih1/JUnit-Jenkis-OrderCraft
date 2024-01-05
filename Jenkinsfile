@@ -39,6 +39,14 @@ pipeline {
         }
     }
 
+    stage ('report') {
+        steps {
+           script {
+               sh 'mvn clean site'
+           }
+        }
+    }
+
     post {
         success {
             echo 'Build succeeded!'
