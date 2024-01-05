@@ -88,25 +88,25 @@ Diagrame cas d'utilisation:
 
 ## Test unitaire pour tout les class service :
 
-![img.png](img.png)
+![img.png](src/assets/img.png)
 
 ## Test pour class ClientServiceTest :
 
-![img_9.png](img_9.png)
+![img_9.png](src/assets/img_9.png)
 
 ## Test pour class CommandeProduittServiceTest :
 
-![img_5.png](img_5.png)
+![img_5.png](src/assets/img_5.png)
 
 ## Test pour class CommandeServiceTest :
 
-![img_6.png](img_6.png)
+![img_6.png](src/assets/img_6.png)
 
 ## Test pour class ProduitServiceTest :
 
-![img_7.png](img_7.png)
+![img_7.png](src/assets/img_7.png)
 
 ## Test pour class UserServiceTest :
 
-![img_8.png](img_8.png)
+![img_8.png](src/assets/img_8.png)
 
