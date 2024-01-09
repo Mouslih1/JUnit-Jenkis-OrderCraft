@@ -5,6 +5,8 @@ import com.exemple.config.PersistenceJPAConfig;
 import com.exemple.entity.Produit;
 import com.exemple.repository.InterfaceProduitRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,21 +23,24 @@ public class ProduitServiceTest {
     private ProduitService produitService;
 
     @Autowired
-    private InterfaceProduitRepository produitRepository;
-
+     static InterfaceProduitRepository produitRepository;
+     private  Produit produit;
+    @BeforeEach
+    void setUp(){
+        produit = new Produit("Produit1", "Description", 10.5, 20);
+        produit = produitService.addProduit(produit);
+    }
     @AfterEach
     void tearDown() {
-        produitRepository.deleteAll();
+        //produitRepository.deleteAll();
     }
     @Test
     void getByIdExistingTest() {
-        // Given
-        Produit produit = new Produit("Produit1", "Description", 10.5, 20);
-        Produit savedProduit = produitRepository.save(produit);
+
         // When
-        Produit retrievedProduit = produitService.getById(savedProduit.getId());
+        Produit retrievedProduit = produitService.getById(produit.getId());
         // Then
-        assertThat(retrievedProduit).isEqualTo(savedProduit);
+        assertThat(retrievedProduit).isEqualTo(produit);
     }
     @Test
     void getByIdNonExistentTest() {
@@ -82,12 +87,11 @@ public class ProduitServiceTest {
     }
     @Test
     void deleteTest() {
-        // Given
-        Produit produit = new Produit("Produit1", "Description", 10.5, 20);
-        Produit savedProduit = produitRepository.save(produit);
+
         // When
-        produitService.delete(savedProduit.getId());
+        produitService.delete(produit.getId()+34);
         // Then
-        assertThat(produitService.getById(savedProduit.getId())).isNull();
+
+        assertThat(produitService.getById(produit.getId())).isNull();
     }
 }
